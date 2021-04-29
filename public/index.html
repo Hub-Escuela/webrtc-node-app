@@ -6,56 +6,54 @@
     <title>WebRTC</title>
 
     <style type="text/css">
+      html {
+        box-sizing: border-box;
+      }
+      *, *::before, *::after {
+        box-sizing: inherit;
+      }
       body {
         margin: 0;
         font-size: 20px;
       }
 
-      .centered {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .video-position {
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+      #room-selection-container {
+        display: grid;
+        justify-content: center;
+        margin-top: 25vh;
       }
 
       #video-chat-container {
-        width: 100%;
-        background-color: black;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        column-gap: 10px;
+        row-gap: 10px;
+        margin: 20px;
       }
 
-      #local-video {
-        position: absolute;
-        height: 30%;
-        width: 30%;
-        bottom: 0px;
-        left: 0px;
+      #video-chat-container video{
+        width: 100%;
       }
 
-      #remote-video {
-        height: 100%;
-        width: 100%;
+      #video-chat-container #local-video.active {
+        border: solid 8px #a2d052;
+      }
+
+      .hidden{
+        display: none !important;
       }
     </style>
   </head>
 
   <body>
-    <div id="room-selection-container" class="centered">
+    
+    <div id="room-selection-container">
       <h1>WebRTC video conference</h1>
-      <label>Enter the number of the room you want to connect</label>
-      <input id="room-input" type="text" />
-      <button id="connect-button">CONNECT</button>
+      <button id="connect-button">ENTRAR</button>
     </div>
 
-    <div id="video-chat-container" class="video-position" style="display: none">
+    <div id="video-chat-container" class="hidden">
       <video id="local-video" autoplay="autoplay" muted="muted"></video>
-      <video id="remote-video" autoplay="autoplay"></video>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
